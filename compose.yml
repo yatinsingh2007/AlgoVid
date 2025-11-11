@@ -1,0 +1,26 @@
+services:
+  client:
+    build: ./client
+    ports:
+      - "3712:3712"
+    depends_on:
+      - server
+
+  server:
+    build: ./server
+    ports:
+      - "7777:7777"
+    environment:
+      - BACKEND_PORT=${BACKEND_PORT}
+      - CLIENT_URL=${CLIENT_URL}
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - database
+
+  database:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5492:5432"
