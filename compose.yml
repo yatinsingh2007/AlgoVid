@@ -1,19 +1,29 @@
 services:
   client:
-    build: ./client
+    build:
+      context: ./client
     ports:
       - "3712:3712"
+    volumes:
+      - ./client:/app               
+      - /app/node_modules              
+    command: npm run dev            
     depends_on:
       - server
 
   server:
-    build: ./server
+    build:
+      context: ./server
     ports:
       - "7777:7777"
     environment:
       - BACKEND_PORT=${BACKEND_PORT}
       - CLIENT_URL=${CLIENT_URL}
       - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      - ./server:/app              
+      - /app/node_modules
+    command: npm run dev            
     depends_on:
       - database
 
@@ -24,3 +34,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5492:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

@@ -8,21 +8,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Code2, Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
+interface LoginPageData {
+  email: string;
+  password: string;
+}
 
 export default function LoginPage() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [formData, setFormData] = useState<LoginPageData>({
     email: "",
-    password: "",
-    rememberMe: false
+    password: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Mock API call - replace with your actual API endpoint
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
@@ -109,23 +111,6 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="remember"
-                  className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  checked={formData.rememberMe}
-                  onChange={(e) => setFormData({ ...formData, rememberMe: e.target.checked })}
-                  disabled={isLoading}
-                />
-                <label
-                  htmlFor="remember"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  Remember me
-                </label>
-              </div>
-
               <Button
                 type="submit"
                 className="w-full gap-2"
@@ -203,7 +188,6 @@ export default function LoginPage() {
           </CardContent>
         </Card>
 
-        {/* Sign Up Link */}
         <p className="text-center text-sm text-muted-foreground">
           Dont have an account?{" "}
           <Link
