@@ -1,16 +1,4 @@
 services:
-  client:
-    build:
-      context: ./client
-    ports:
-      - "3712:3712"
-    volumes:
-      - ./client:/app               
-      - /app/node_modules              
-    command: npm run dev            
-    depends_on:
-      - server
-
   server:
     build:
       context: ./server
