@@ -61,7 +61,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section */}
         <section className="px-4 py-20 sm:px-6 lg:px-8">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-12">
@@ -154,7 +153,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How It Works Section */}
         <section id="how-it-works" className="px-4 py-20 sm:px-6 lg:px-8 bg-muted/30">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-12">

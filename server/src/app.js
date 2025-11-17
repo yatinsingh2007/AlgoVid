@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const { auth } = require('./auth/auth');
 
 const { prisma } = require('../prisma/prismaConfig');
 
@@ -10,9 +12,10 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
-
-app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+
+app.use('/api/auth' , auth);
 
 
 app.get('/', (req, res) => {
